@@ -3,6 +3,7 @@ package com.janaka.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.janaka.CardTypeConstants;
 import com.janaka.model.CreditCardInfo;
 import com.janaka.repository.CreditCardInfoRepository;
 
@@ -13,8 +14,8 @@ public class CreditCardInfoService {
 	CreditCardInfoRepository creditCardInfoRepository;
 	
 	public void getCreditCardInfo(CreditCardInfo creditCardInfo) {
-		creditCardInfo.setCreditCardValidity(isValid(creditCardInfo.getCreditCardNumber()));
-		//isValid(creditCardInfo.getCreditCardNumber());
+		creditCardInfo.setCreditCardValidity(isValid(creditCardInfo.getCreditCardNumber()));		
+		getCardType(creditCardInfo.getCreditCardNumber(), creditCardInfo);
 	}
 	
 	public static boolean isValid(Long creditCardNumber) {
@@ -64,20 +65,45 @@ public class CreditCardInfoService {
     public static int getCreditCardLength(long d) {
     	
         String num = d + "";
-        //System.out.println("ABC "+ num);
         return num.length();
     }
  
     public static long getPrefix(long creditCardNumber, int k) {
         if (getCreditCardLength(creditCardNumber) > k) {
             String num = creditCardNumber + "";
-            //System.out.println("substring "+ Long.parseLong(num.substring(0, k)));
-            
             return Long.parseLong(num.substring(0, k));
         }
         
         return creditCardNumber;
     }
+
+	public static void getCardType(Long creditCardNumber, CreditCardInfo creditCardInfo) {
+		
+		String num = creditCardNumber + "";
+		String prefix = num.substring(0, 1);
+		
+		switch(prefix) {
+		
+			case "3" : creditCardInfo.setCreditCardType(CardTypeConstants.AMEX);
+			break;
+			
+			case "6" : creditCardInfo.setCreditCardType(CardTypeConstants.DISCOVER);
+			break;
+			
+			case "5" : creditCardInfo.setCreditCardType(CardTypeConstants.MASTERCARD);
+			break;
+			
+			case "4" : creditCardInfo.setCreditCardType(CardTypeConstants.VISA);
+			break;
+			
+			case "1" : creditCardInfo.setCreditCardType(CardTypeConstants.VISA);
+			break;
+			
+			default : creditCardInfo.setCreditCardType(CardTypeConstants.UNKNOWN);
+			break;
+		}
+		
+	}
 	
 	
 

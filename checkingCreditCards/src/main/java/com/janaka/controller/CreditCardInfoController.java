@@ -19,10 +19,9 @@ public class CreditCardInfoController {
 	
 	@RequestMapping(value="creditcardnumber", method=RequestMethod.POST)
 	@ResponseBody
-	private Boolean getCreditCardInfo(@RequestBody CreditCardInfo creditCardInfo) {
+	private CreditCardInfo getCreditCardInfo(@RequestBody CreditCardInfo creditCardInfo) {
 		creditCardInfoService.getCreditCardInfo(creditCardInfo);
-		System.out.println(creditCardInfo.getCreditCardNumber());
-		return creditCardInfo.getCreditCardValidity();
+		return creditCardInfo;
 	}
 
 }
