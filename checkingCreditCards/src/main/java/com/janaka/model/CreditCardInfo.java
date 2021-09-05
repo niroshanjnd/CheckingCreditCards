@@ -4,11 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
 public class CreditCardInfo {
 	
@@ -21,6 +16,30 @@ public class CreditCardInfo {
 	
 	@Column
 	private Boolean creditCardValidity;
-	
 
+	public Long getCreditCardNumber() {
+		return creditCardNumber;
+	}
+
+	public void setCreditCardNumber(Long creditCardNumber) {
+		this.creditCardNumber = creditCardNumber;
+	}
+
+	public String getCreditCardType() {
+		return creditCardType;
+	}
+
+	public void setCreditCardType(String creditCardType) {
+		this.creditCardType = creditCardType;
+	}
+
+	public Boolean getCreditCardValidity() {
+		return creditCardValidity;
+	}
+
+	public void setCreditCardValidity(Boolean creditCardValidity) {
+		this.creditCardValidity = creditCardValidity;
+	}
+	
+	
 }
