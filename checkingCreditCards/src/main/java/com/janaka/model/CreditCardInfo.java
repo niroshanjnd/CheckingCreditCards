@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class CreditCardInformation {
+public class CreditCardInfo {
 	
 	@Id
 	@Column
