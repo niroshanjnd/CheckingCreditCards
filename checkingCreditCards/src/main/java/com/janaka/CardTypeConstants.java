@@ -1,6 +1,10 @@
 package com.janaka;
 
-public class CardTypeConstants {
+public final class CardTypeConstants {
+	
+	private CardTypeConstants() {
+		
+	}
 	
 	public static final String AMEX = "AMEX";
 	

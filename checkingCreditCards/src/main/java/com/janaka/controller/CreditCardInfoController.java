@@ -1,9 +1,8 @@
 package com.janaka.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,13 +10,16 @@ import com.janaka.model.CreditCardInfo;
 import com.janaka.service.CreditCardInfoService;
 
 @RestController
-@RequestMapping("creditcardinfo")
+@RequestMapping("/creditcardinfo")
 public class CreditCardInfoController {
 	
-	@Autowired
-	CreditCardInfoService creditCardInfoService;
+	private final CreditCardInfoService creditCardInfoService;
 	
-	@RequestMapping(value="creditcardnumber", method=RequestMethod.POST)
+	public CreditCardInfoController(CreditCardInfoService creditCardInfoService) {
+		this.creditCardInfoService = creditCardInfoService;
+	}
+
+	@PostMapping("/creditcardnumber")
 	@ResponseBody
 	private CreditCardInfo getCreditCardInfo(@RequestBody CreditCardInfo creditCardInfo) {
 		creditCardInfoService.getCreditCardInfo(creditCardInfo);
